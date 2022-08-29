@@ -18,24 +18,6 @@ const requestBaseURL = "https://api.maas2.apollorion.com";
 const solsCount = 5;
 const results = {};
 
-/**
- * небольшой TS экскурс в данные
- * 
- * type resultsType = Array<resolvedData | unresolvedData>;
- *
- * interface resolvedData {
- *   sol: number;
- *   min: number;
- *   max: number;
- * }
- *
- * interface unresolvedData {
- *   sol: number;
- *   queue: boolean;
- * }
- *
- */
-
 // Корневая логика
 //  -> Запрос
 //  -> поместили значение в глобальные результаты

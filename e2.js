@@ -1,6 +1,10 @@
 /**
- * RXJS Macic:
+ * RxJS is Magic:
  * concatMap() for the win!
+ *
+ * Для регуляции очередей, последовательностей, подписок событий придумали шикарную библиотеку,
+ * которая в масштабах оперирования с каскадами данных в том числе асинхронных является красивым инструментом.
+ *
  *
  */
 
@@ -15,14 +19,15 @@ const logData = (data) =>
   console.log(`Sol #${data.sol}: ${data.min_temp}..${data.max_temp} C`);
 
 const Process = async () => {
-  // go full RXJS-style
+  // Все в observable!
   from(fetch(requestBaseURL))
     .pipe(switchMap((res) => res.json()))
+    // Первый результат
     .subscribe((firstRequest) => {
-      // first result
+      // Сразу показываем
       logData(firstRequest);
 
-      // Create array of observables
+      // На его базе создаем массив Observable[]
       of(
         ...Array.from(
           { length: solsCount - 1 },
@@ -31,10 +36,11 @@ const Process = async () => {
           from(fetch(`${requestBaseURL}/${v}`)).pipe(switchMap((r) => r.json()))
         )
       )
-        // Concat-Map observable array to keep emit order
+        // натравливаем Concat-Map на массив для
+        // сохранения порядка эмиттера
         .pipe(concatMap((v) => v))
 
-        // Get the results
+        // По ходу работы эмиттера, показываем
         .subscribe((v) => logData(v));
     });
 };
