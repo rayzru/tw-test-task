@@ -31,19 +31,19 @@ Sol #2663: -70..-7 C
 npm install
 ```
 
-### Первый пример - simple vanilla approach [fetch + promises + queue](e1.js)
+### Первый пример - simple vanilla approach [fetch + promises + queue](src/e1.js)
 
 ```
 npm run e1
 ```
 
-### Второй - RxJS is fun [rxjs + concatMap](e2.js)
+### Второй - RxJS is fun [rxjs + concatMap](src/e2.js)
 
 ```
 npm run e2
 ```
 
-### Реакт приложение с теми же приложениями, но вывод в консоль браузера - [Первый](Example1.js) и [Второй](Example2.js)
+### Реакт приложение с теми же приложениями, но вывод в консоль браузера - [Первый](src/Example1.js) и [Второй](src/Example2.js)
 
 ```
 npm start
