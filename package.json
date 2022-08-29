@@ -1,11 +1,27 @@
 {
   "type": "module",
   "scripts": {
-    "e1": "node e1.js",
-    "e2": "node e2.js"
+    "e1": "node src/e1.js",
+    "e2": "node src/e2.js",
+    "start": "react-scripts start"
   },
   "dependencies": {
     "node-fetch": "^3.2.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
     "rxjs": "^7.5.6"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

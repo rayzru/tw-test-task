@@ -12,25 +12,18 @@
 
 import fetch from "node-fetch";
 
-const requestBaseURL = "https://api.maas2.apollorion.com";
-
-// для наглядности можем увеличить количество до 25, приостановка будет видна на глаз
-const solsCount = 5;
+const baseUrl = "https://api.maas2.apollorion.com";
 const results = {};
+const log = ({ sol, min, max }) => console.log(`Sol #${sol}: ${min}..${max} C`);
 
-// Корневая логика
 //  -> Запрос
 //  -> поместили значение в глобальные результаты
 //  -> триггернули вывод
-const getForecastData = (sol = undefined) =>
-  fetch(`${requestBaseURL}${sol ? "/" + sol : "/"}`)
+const fetchData = (sol = undefined) =>
+  fetch(`${baseUrl}${sol ? "/" + sol : "/"}`)
     .then((res) => res.json())
     .then(collect)
     .then(distribute);
-
-// вывод
-const logData = (data) =>
-  console.log(`Sol #${data.sol}: ${data.min}..${data.max} C`);
 
 // сохранение данных
 const collect = (data) => {
@@ -53,25 +46,25 @@ const distribute = (data) => {
     if (item.queue) break;
 
     // не очередь? Вывели, почтистили.
-    logData(item);
+    log(item);
     delete results[item.sol];
   }
 
-  // для внешнего чейна
   return data;
 };
 
-const Process = async () => {
-  const latest = await getForecastData();
-  const queue = [
-    ...Array.from({ length: solsCount - 1 }, (v, k) => latest.sol - k - 1),
-  ];
-  const promises = queue.map((queueSol) => {
-    const p = getForecastData(queueSol);
-    results[queueSol] = { sol: queueSol, queue: true };
+export const Process = async () => {
+  const latest = await fetchData();
+
+  const queue = [...Array.from({ length: 4 }, (v, k) => latest.sol - k - 1)];
+  const promises = queue.map((sol) => {
+    const p = fetchData(sol);
+    results[sol] = { sol, queue: true };
     return p;
   });
   Promise.all(promises);
 };
 
 Process();
+
+export default Process;
