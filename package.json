@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "scripts": {
+    "e1": "node e1.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.2.10"
+  }
+}
