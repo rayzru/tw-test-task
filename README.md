@@ -1,14 +1,21 @@
 # TradingView Tasks
 
-### Setup
+## Setup
 
 ```
 npm install
 ```
 
-### Run
+## Run
+
+### First example - simple vanilla approach [fetch + promises + queue](e1.js)
 
 ```
-# Simpliest: fetch + promises + queue
 npm run e1
+```
+
+### Second - RxJS is fun [rxjs + concatMap](e2.js)
+
+```
+npm run e2
 ```
